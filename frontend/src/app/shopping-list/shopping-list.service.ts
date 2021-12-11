@@ -2,8 +2,8 @@ import {IngredientModel} from "../Models/ingredient/ingredient.model";
 import {EventEmitter} from "@angular/core";
 
 export class ShoppingListService {
-  ingredientsChanged = new EventEmitter<IngredientModel[]>();
   private ingredients: IngredientModel[];
+  ingredientsChanged = new EventEmitter<IngredientModel[]>();
 
   createIngredients() {
     this.ingredients = [
@@ -18,5 +18,11 @@ export class ShoppingListService {
   addIngredient(ingredient: IngredientModel) {
     this.ingredients.push(ingredient);
     this.ingredientsChanged.emit(this.ingredients.slice());
+    console.log(this.ingredients.slice());
+  }
+
+  addIngredientsToShoppingList(ingredientsToBeAdded: string) {
+    let newIngredients: IngredientModel[] = JSON.parse(ingredientsToBeAdded);
+    this.ingredientsChanged.emit(newIngredients.slice());
   }
 }
